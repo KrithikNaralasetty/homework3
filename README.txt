@@ -47,9 +47,9 @@ Question 3: iperf of h1->h2 and iperf h1->h8
    1.      2.      3. Differences between the throughputs of the bandwidth are because of the distance between the hosts. The number of switches between h1 and h8 (3 switches) is far more compared to between h1 and h2 (1 switch) and that is why the bandwidth minimizes
 Question 4:Which switches Observe Traffic
    1. Switches that observe traffic
-All the switches observed traffic because the network had to be flooded to search for the destination port whenever we try to ping between 2 hosts
+The switches that observe traffic are switches 1, 2, 3, 5, and 7.  Switch 3 is used for both connecting h1 and h2 and h1 and h8. Switches 2, 1, 5, and 7 are used for communicating between h1 and h8. But to build the entire path, the entire set of switches observe traffic since the controller should have the map of the entire network
    2. How did I find it out?
-The pox debug output shows the flooding of packets into different MAC addresses, if we add the print statement of “print(str(self.mac_to_port) + " checked")” in the act_like_hub function
+I tried counting the hops on the binary tree.
 Task 3
 Question 1: Describe how the above code works
 The code basically describes the action of building rules in the OpenFlow controller attached to the mininet. The code basically checks the controller if a rule was established between the given hosts. If it doesn’t exist, the packet is basically flooded over the entire network to try and find the destination and the port it is attached to, by using OFPP_ALL which basically floods all the physical ports except the input port.
