@@ -64,6 +64,7 @@ class Tutorial (object):
 
 
   def act_like_hub (self, packet, packet_in):
+    pass
     # """
     # Implement hub-like behavior -- send all packets to all ports besides
     # the input port.
