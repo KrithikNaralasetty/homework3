@@ -78,24 +78,21 @@ class Tutorial (object):
     # # implementation would check that we got the full data before
     # # sending it (len(packet_in.data) should be == packet_in.total_len)).
 
-  def act_like_switch (self, packet, packet_in):
-    
+
+  def act_like_switch(self, packet, packet_in):
     # Learn the port for the source MAC
     # print("Src: ",str(packet.src),":", packet_in.in_port,"Dst:", str(packet.dst))
     if packet.src not in self.mac_to_port:
-      print("Learning that " + str(packet.src) + " is attached at port " +str(packet_in.in_port))
+      print("Learning that " + str(packet.src) + " is attached at port " + str(packet_in.in_port))
       self.mac_to_port[packet.src] = packet_in.in_port
-    
-    # if the port associated with the destination MAC of the packet is known:
-    if packet.dst in self.mac_to_port:
-    # Send packet out the associated port
-      print(str(packet.dst) + " destination known. only send message to it")
-      self.resend_packet(packet_in, self.mac_to_port[packet.dst])
+
     else:
-    # Flood the packet out everything but the input port
-    # This part looks familiar, right?
+      # Flood the packet out everything but the input port
+      # This part looks familiar, right?
       print(str(packet.dst) + " not known, resend to everybody")
       self.resend_packet(packet_in, of.OFPP_ALL)
+
+
 
   def _handle_PacketIn (self, event):
     """
