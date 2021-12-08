@@ -82,7 +82,7 @@ class Tutorial (object):
 
   def act_like_switch(self, packet, packet_in):
     # Learn the port for the source MAC
-    # print("Src: ",str(packet.src),":", packet_in.in_port,"Dst:", str(packet.dst))
+    print("Src: ",str(packet.src),":", packet_in.in_port,"Dst:", str(packet.dst))
     if packet.src not in self.mac_to_port:
       print("Learning that " + str(packet.src) + " is attached at port " + str(packet_in.in_port))
       self.mac_to_port[packet.src] = packet_in.in_port
